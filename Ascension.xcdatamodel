@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="23C71" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Pillar" representedClassName="Pillar" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="ascents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ascent" inverseName="pillar" inverseEntity="Ascent"/>
+        <relationship name="metrics" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Metric" inverseName="pillar" inverseEntity="Metric"/>
+        <relationship name="summit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Summit" inverseName="pillars" inverseEntity="Summit"/>
+    </entity>
+    <entity name="Ascent" representedClassName="Ascent" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="basecamps" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Basecamp" inverseName="ascent" inverseEntity="Basecamp"/>
+        <relationship name="pillar" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pillar" inverseName="ascents" inverseEntity="Pillar"/>
+    </entity>
+    <entity name="Basecamp" representedClassName="Basecamp" syncable="YES" codeGenerationType="class">
+        <attribute name="dueDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="ascent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Ascent" inverseName="basecamps" inverseEntity="Ascent"/>
+    </entity>
+    <entity name="Metric" representedClassName="Metric" syncable="YES" codeGenerationType="class">
+        <attribute name="currentValue" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="unit" optional="YES" attributeType="String"/>
+        <relationship name="pillar" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pillar" inverseName="metrics" inverseEntity="Pillar"/>
+    </entity>
+    <entity name="Summit" representedClassName="Summit" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="pillars" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Pillar" inverseName="summit" inverseEntity="Pillar"/>
+    </entity>
+</model>
